@@ -12,14 +12,15 @@
     <string name="pref_is_metric_label">Units</string>
     <string name="pref_is_metric_key">is_metric</string>
     <string name="pref_is_metric_default">1</string>
+    <string name="action_show_location">Show location on map</string>
+    <string name="action_share">Share</string>
 
-
-    <string-array name="pref_is_metric_entry_names">
+    <string-array name="pref_is_metric_names">
         <item>Metric</item>
         <item>Imperial</item>
     </string-array>
 
-    <string-array name="pref_is_metric_entry_values">
+    <string-array name="pref_is_metric_values">
         <item>1</item>
         <item>0</item>
     </string-array>

@@ -1,6 +1,9 @@
 package co.msingh.android.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,9 +61,28 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this, SettingsActivity.class );
             startActivity(intent);
             return true;
+        } else if(id == R.id.action_show_location){
+            openPreferredLocationInMap();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openPreferredLocationInMap(){
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String loc = mPrefs.getString(
+                getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default));
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("geo:0,0?q=" + loc));
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No relevant app found", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
