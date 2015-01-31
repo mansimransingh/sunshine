@@ -10,4 +10,10 @@
            android:inputType="text"
            android:singleLine="true" />
 
+        <ListPreference
+            android:title="@string/pref_is_metric_label"
+            android:key="@string/pref_is_metric_key"
+            android:defaultValue="@string/pref_is_metric_default"
+            android:entries="@array/pref_is_metric_entry_names"
+            android:entryValues="@array/pref_is_metric_entry_values" />
 </PreferenceScreen>

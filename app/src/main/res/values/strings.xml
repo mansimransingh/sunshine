@@ -9,5 +9,18 @@
     <string name="pref_location_key" translatable="false">location</string>
     <string name="pref_location_label" >Location</string>
     <string name="pref_location_default" translatable="false">Sheffield</string>
+    <string name="pref_is_metric_label">Units</string>
+    <string name="pref_is_metric_key">is_metric</string>
+    <string name="pref_is_metric_default">1</string>
 
+
+    <string-array name="pref_is_metric_entry_names">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+
+    <string-array name="pref_is_metric_entry_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 </resources>
