@@ -1,9 +1,11 @@
 package co.msingh.android.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,7 @@ import java.util.Date;
 public class ForecastFragment extends Fragment {
     private ArrayAdapter<String> mAdapter;
     private FetchWeatherTask mFetchWeatherTask;
+    private SharedPreferences mPrefs;
     public ForecastFragment() {
     }
 
@@ -49,7 +52,11 @@ public class ForecastFragment extends Fragment {
         int id = item.getItemId();
         if(id == R.id.action_refresh){
             mFetchWeatherTask = new FetchWeatherTask();
-            mFetchWeatherTask.execute("Sheffield");
+
+            String loc = mPrefs.getString(
+                    getString(R.string.pref_location_key),
+                    getString(R.string.pref_location_default));
+            mFetchWeatherTask.execute(loc);
 
             return true;
         }
@@ -62,7 +69,7 @@ public class ForecastFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         ArrayList weather = new ArrayList<String>();
