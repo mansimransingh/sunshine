@@ -88,7 +88,7 @@ public class DetailActivity extends ActionBarActivity {
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
             inflater.inflate(R.menu.menu_detail_fragment, menu);
             MenuItem item = menu.findItem(R.id.action_share);
-            
+
             ShareActionProvider mShareActionProvider;
             mShareActionProvider = new ShareActionProvider(getActivity());
             mShareActionProvider.setShareIntent(createShareIntent());
