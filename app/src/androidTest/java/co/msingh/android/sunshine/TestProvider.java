@@ -159,6 +159,8 @@ public class TestProvider extends AndroidTestCase {
                  null
          );
          TestDb.validateCursor(weatherCursor, weatherValues);
+
+
      }
 
     
@@ -196,9 +198,6 @@ public class TestProvider extends AndroidTestCase {
      }
 
 
-     /* TODO Uncomment for
-     4b - Updating and Deleting
-     https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1675098563/m-1675098564
      public void testUpdateLocation() {
          // Create a new map of values, where column names are the keys
          ContentValues values = TestDb.createNorthPoleLocationValues();
@@ -232,7 +231,7 @@ public class TestProvider extends AndroidTestCase {
 
          TestDb.validateCursor(cursor, updatedValues);
      }
-     */
+
 
      // Make sure we can still delete after adding/updating stuff
      public void testDeleteRecordsAtEnd() {

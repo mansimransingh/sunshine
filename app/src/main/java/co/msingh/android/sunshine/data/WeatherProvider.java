@@ -189,11 +189,6 @@ public class WeatherProvider extends ContentProvider {
                 );
                  break;
              }
-             /**
-              * TODO YOUR CODE BELOW HERE FOR QUIZ
-              * QUIZ - 4b - Implement Location_ID queries
-              * https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1675098551/m-1675098552
-              **/
 
              default:
                  throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -283,12 +278,27 @@ public class WeatherProvider extends ContentProvider {
      @Override
      public int update(
              Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-         /**
-          * TODO YOUR CODE BELOW HERE FOR QUIZ
-          * QUIZ - 4b - Updating and Deleting
-          * https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1675098563/m-1675098564
-          **/
-         return 0;
+         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+         final int match = sUriMatcher.match(uri);
+         int rowsDeleted;
+         switch (match) {
+             case WEATHER:
+                 rowsDeleted = db.update(
+                         WeatherContract.WeatherEntry.TABLE_NAME, values, selection, selectionArgs);
+                 break;
+             case LOCATION:
+                 rowsDeleted = db.update(
+                         WeatherContract.LocationEntry.TABLE_NAME, values, selection, selectionArgs);
+                 break;
+             default:
+                 throw new UnsupportedOperationException("Unknown uri: " + uri);
+         }
+         // Because a null deletes all rows
+         if (selection == null || rowsDeleted != 0) {
+             getContext().getContentResolver().notifyChange(uri, null);
+         }
+         return rowsDeleted;
+
      }
 
      @Override
