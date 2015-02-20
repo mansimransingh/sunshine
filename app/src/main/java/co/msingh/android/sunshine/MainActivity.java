@@ -102,10 +102,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void openPreferredLocationInMap(){
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String loc = mPrefs.getString(
-                getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
+//        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String loc = Utility.getPreferredLocation(this);
 
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
