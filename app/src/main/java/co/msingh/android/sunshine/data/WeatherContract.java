@@ -18,6 +18,8 @@ package co.msingh.android.sunshine.data;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.text.format.Time;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +54,15 @@ public class WeatherContract {
 
     public static final String DATE_FORMAT = "yyyyMMdd";
 
+    // To make it easy to query for the exact date, we normalize all dates that go into
+    // the database to the start of the the Julian day at UTC.
+    public static long normalizeDate(long startDate) {
+        // normalize the start date to the beginning of the (UTC) day
+        Time time = new Time();
+        time.setToNow();
+        int julianDay = Time.getJulianDay(startDate, time.gmtoff);
+        return time.setJulianDay(julianDay);
+    }
 
     /**
      * Converts Date class to a string representation, used for easy comparison and database lookup.
@@ -85,11 +96,7 @@ public class WeatherContract {
 
 
     public static final class LocationEntry implements BaseColumns {
-        /**
-         * TODO YOUR CODE BELOW HERE FOR QUIZ
-         * QUIZ - 4a - Columns
-         * https://www.udacity.com/course/viewer#!/c-ud853/l-1639338560/e-1633698595/m-1633698597
-         **/
+
 
         public static final String TABLE_NAME = "location";
 
@@ -114,11 +121,7 @@ public class WeatherContract {
                 "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
 
 
-        /**
-         * TODO YOUR CODE BELOW HERE FOR QUIZ
-         * QUIZ - 4b - Adding LocationEntry with ID UriBuilder
-         * https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1604969848/m-1604969849
-         **/
+
 
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -198,5 +201,18 @@ public class WeatherContract {
         public static String getStartDateFromUri(Uri uri) {
             return uri.getQueryParameter(COLUMN_DATETEXT);
         }
+
+    public static Uri buildWeatherLocationWithStartDate(
+            String locationSetting, long startDate) {
+        long normalizedDate = normalizeDate(startDate);
+        return CONTENT_URI.buildUpon().appendPath(locationSetting)
+                .appendQueryParameter(COLUMN_DATETEXT, Long.toString(normalizedDate)).build();
     }
+
+    public static Uri buildWeatherLocationWithDate(String locationSetting, long date) {
+        return CONTENT_URI.buildUpon().appendPath(locationSetting)
+                .appendPath(Long.toString(normalizeDate(date))).build();
+    }
+
+}
 }
