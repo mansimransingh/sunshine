@@ -21,7 +21,7 @@
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="co.msingh.android.sunshine.MainActivity" />
@@ -37,7 +37,10 @@
         </activity>
         <provider
             android:authorities="co.msingh.android.sunshine"
-            android:name=".data.WeatherProvider" />
+            android:name=".data.WeatherProvider"
+            android:enabled="true"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

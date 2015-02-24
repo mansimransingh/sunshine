@@ -30,16 +30,23 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
     private String LOG_TAG = "Sunshine";
+    private String mLocation;
+
+    private final String FORECASTFRAGMENT_TAG = "FFTAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mLocation = Utility.getPreferredLocation(this);
         super.onCreate(savedInstanceState);
         Log.i(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment())
+                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
                     .commit();
         }
+
+
     }
 
     @Override
@@ -53,10 +60,24 @@ public class MainActivity extends ActionBarActivity {
         super.onRestart();
         Log.i(LOG_TAG, "onRestart");
     }
+
+    //this is also called when settings is closed
     @Override
     protected void onResume(){
         super.onResume();
         Log.i(LOG_TAG, "onResume");
+
+
+        String location = Utility.getPreferredLocation(this);
+
+        //location cna be null if its the first time the app is loaded
+        if(location != null && !location.equals(mLocation)){
+            ForecastFragment ff = (ForecastFragment)getSupportFragmentManager().findFragmentByTag(FORECASTFRAGMENT_TAG);
+            if(ff != null){
+                ff.onLocationChanged();
+            }
+            mLocation = location;
+        }
     }
     @Override
     protected void onPause(){

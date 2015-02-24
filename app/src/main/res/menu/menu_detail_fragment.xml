@@ -5,7 +5,7 @@
         android:id="@+id/action_share"
         app:showAsAction="always"
         android:title="@string/action_share"
-        android:actionProviderClass=
+        app:actionProviderClass=
             "android.support.v7.widget.ShareActionProvider"
         android:orderInCategory="82"
         />
