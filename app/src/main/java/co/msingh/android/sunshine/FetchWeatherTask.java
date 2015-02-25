@@ -9,9 +9,6 @@ import android.os.AsyncTask;
 import android.text.format.Time;
 import android.util.Log;
 
-import co.msingh.android.sunshine.data.WeatherContract;
-import co.msingh.android.sunshine.data.WeatherContract.WeatherEntry;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +20,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Vector;
+
+import co.msingh.android.sunshine.data.WeatherContract;
+import co.msingh.android.sunshine.data.WeatherContract.WeatherEntry;
 
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 

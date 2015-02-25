@@ -24,9 +24,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-import co.msingh.android.sunshine.data.WeatherContract;
-import co.msingh.android.sunshine.data.WeatherDbHelper;
-
 public class WeatherProvider extends ContentProvider {
 
      // The URI Matcher used by this content provider.

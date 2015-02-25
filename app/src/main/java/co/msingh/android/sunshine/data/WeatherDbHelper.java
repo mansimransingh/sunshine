@@ -18,6 +18,7 @@ package co.msingh.android.sunshine.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import co.msingh.android.sunshine.data.WeatherContract.LocationEntry;
 import co.msingh.android.sunshine.data.WeatherContract.WeatherEntry;
 /**
