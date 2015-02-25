@@ -19,7 +19,7 @@ public class ForecastAdapter extends CursorAdapter {
     }
 
     private static final int VIEW_TYPE_TODAY = 0;
-    private static final int VIEW_TYPE_FUTURE_TODAY = 1;
+    private static final int VIEW_TYPE_FUTURE_DAY = 1;
     private static final int VIEW_TYPE_COUNT = 2;
 
     @Override
@@ -41,7 +41,7 @@ public class ForecastAdapter extends CursorAdapter {
 
     @Override
     public int getItemViewType(int position){
-        return (position == 0) ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_TODAY;
+        return (position == 0) ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
     }
 
     @Override
@@ -57,6 +57,23 @@ public class ForecastAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
+        int viewType = getItemViewType(cursor.getPosition());
+
+        switch (viewType) {
+            case VIEW_TYPE_TODAY: {
+                // Get weather icon
+                viewHolder.weatherIcon.setImageResource(Utility.getArtResourceForWeatherCondition(
+                        cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID)));
+                break;
+            }
+            case VIEW_TYPE_FUTURE_DAY: {
+                // Get weather icon
+                viewHolder.weatherIcon.setImageResource(Utility.getIconResourceForWeatherCondition(
+                        cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID)));
+                break;
+            }
+        }
+
         boolean isMetric = Utility.isMetric(context);
 
         int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ID);
@@ -66,8 +83,6 @@ public class ForecastAdapter extends CursorAdapter {
 
         Long date = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
         String condition = cursor.getString(ForecastFragment.COL_WEATHER_DESC);
-
-        viewHolder.weatherIcon.setImageResource(R.mipmap.ic_launcher);
 
         viewHolder.listItemForecastDay.setText(Utility.getFriendlyDayString(context, date));
         viewHolder.listItemForecastCondition.setText(condition);

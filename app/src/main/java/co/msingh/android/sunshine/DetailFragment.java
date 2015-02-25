@@ -44,7 +44,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             WeatherContract.WeatherEntry.COLUMN_HUMIDITY,
             WeatherContract.WeatherEntry.COLUMN_WIND_SPEED,
             WeatherContract.WeatherEntry.COLUMN_PRESSURE,
-            WeatherContract.WeatherEntry.COLUMN_DEGREES
+            WeatherContract.WeatherEntry.COLUMN_DEGREES,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
     };
 
     private static final int COL_WEATHER_ID = 0;
@@ -56,6 +57,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final int COL_WEATHER_WIND_SPEED = 6;
     private static final int COL_WEATHER_PRESSURE = 7;
     private static final int COL_WEATHER_DEGREES = 8;
+    private static final int COL_WEATHER_TYPE_ID = 9;
 
     private ShareActionProvider mShareActionProvider;
     private TextView mDayTextView;
@@ -148,9 +150,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if(data != null && data.moveToFirst()){
-            int weatherId = data.getInt(COL_WEATHER_ID);
-            mWeatherIcon.setImageResource(R.mipmap.ic_launcher);
-
+            int weatherId = data.getInt(COL_WEATHER_TYPE_ID);
+            mWeatherIcon.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
             boolean isMetric = Utility.isMetric(getActivity());
             String weatherDescription = data.getString(COL_WEATHER_DESC);
