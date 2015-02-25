@@ -67,7 +67,7 @@ public class ForecastAdapter extends CursorAdapter {
         Long date = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
         String condition = cursor.getString(ForecastFragment.COL_WEATHER_DESC);
 
-        viewHolder.weatherIcon.setImageResource(R.drawable.ic_launcher);
+        viewHolder.weatherIcon.setImageResource(R.mipmap.ic_launcher);
 
         viewHolder.listItemForecastDay.setText(Utility.getFriendlyDayString(context, date));
         viewHolder.listItemForecastCondition.setText(condition);

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:id="@+id/list_item_forecast_icon"
-        android:src="@drawable/ic_launcher" />
+         />
 
     <LinearLayout
         android:orientation="vertical"

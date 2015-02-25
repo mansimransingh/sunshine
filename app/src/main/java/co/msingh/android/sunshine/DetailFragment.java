@@ -149,7 +149,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if(data != null && data.moveToFirst()){
             int weatherId = data.getInt(COL_WEATHER_ID);
-            mWeatherIcon.setImageResource(R.drawable.ic_launcher);
+            mWeatherIcon.setImageResource(R.mipmap.ic_launcher);
 
 
             boolean isMetric = Utility.isMetric(getActivity());
