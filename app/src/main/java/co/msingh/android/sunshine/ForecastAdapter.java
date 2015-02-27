@@ -92,6 +92,13 @@ public class ForecastAdapter extends CursorAdapter {
         viewHolder.listItemForecastCondition.setText(condition);
         viewHolder.listItemForecastHigh.setText(Utility.formatTemperature(context, high, isMetric));
         viewHolder.listItemForecastLow.setText(Utility.formatTemperature(context, low, isMetric));
+
+        view.setContentDescription(context.getString(R.string.format_list_item_content_description,
+                Utility.getFriendlyDayString(context, cursor.getLong(ForecastFragment.COL_WEATHER_DATE)),
+                cursor.getString(ForecastFragment.COL_WEATHER_DESC),
+                high,
+                low
+        ));
     }
 
 
