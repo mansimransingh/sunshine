@@ -6,53 +6,70 @@
     android:orientation="horizontal"
     android:focusableInTouchMode="false"
     android:padding="16dp"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="@drawable/touch_selector"
     >
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="fill_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:id="@+id/list_item_forecast_icon"
-         />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:id="@+id/list_item_forecast_icon"
+            android:layout_gravity="center" />
+        </FrameLayout>
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:paddingLeft="16dp" >
+        android:layout_weight="7"
+        android:paddingLeft="16dp"
+        >
 
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/list_item_forecast_day" />
+            android:id="@+id/list_item_forecast_day"
+            android:textAppearance="?android:textAppearanceLarge"/>
 
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/list_item_forecast_condition" />
+            android:id="@+id/list_item_forecast_condition"
+            android:textAppearance="?android:textAppearanceSmall" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_weight="5">
 
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/list_item_forecast_high" />
+            android:id="@+id/list_item_forecast_high"
+            android:textAppearance="?android:textAppearanceLarge"/>
 
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/list_item_forecast_low" />
+            android:id="@+id/list_item_forecast_low"
+            android:textAppearance="?android:textAppearanceSmall"/>
     </LinearLayout>
 
 </LinearLayout>
