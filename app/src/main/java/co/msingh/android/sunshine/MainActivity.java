@@ -168,5 +168,10 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             startActivity(intent);
         }
     }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+
+    }
 
 }
