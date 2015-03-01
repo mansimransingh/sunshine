@@ -70,4 +70,7 @@
     lowest temperature <xliff:g id="min">%s</xliff:g>,
     highest temperature <xliff:g id="max">%s</xliff:g>
 </string>
+
+    <string name="sync_account_type">sunshine.android.msingh.co</string>
+    <string name="content_authority">co.msingh.android.sunshine</string>
 </resources>
