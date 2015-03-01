@@ -90,21 +90,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             mLocation = location;
         }
     }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.i(LOG_TAG, "onPause");
-    }
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.i(LOG_TAG, "onStop");
-    }
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        Log.i(LOG_TAG, "onDestroy");
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,27 +110,12 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             Intent intent = new Intent(this, SettingsActivity.class );
             startActivity(intent);
             return true;
-        } else if(id == R.id.action_show_location){
-            openPreferredLocationInMap();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void openPreferredLocationInMap(){
-//        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String loc = Utility.getPreferredLocation(this);
 
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("geo:0,0?q=" + loc));
-        if(intent.resolveActivity(getPackageManager()) != null){
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "No relevant app found", Toast.LENGTH_LONG).show();
-        }
-    }
 
 
 

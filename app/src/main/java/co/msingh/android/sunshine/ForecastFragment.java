@@ -1,5 +1,6 @@
 package co.msingh.android.sunshine;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import co.msingh.android.sunshine.data.WeatherContract;
 import co.msingh.android.sunshine.sync.SunshineSyncAdapter;
@@ -90,6 +92,9 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             updateWeather();
+            return true;
+        } else if(id == R.id.action_show_location){
+            openPreferredLocationInMap();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -230,5 +235,26 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             bundle.putInt(SELECTED_KEY, mPosition);
         }
         super.onSaveInstanceState(bundle);
+    }
+
+    public void openPreferredLocationInMap(){
+        if(mForecastAdapter != null){
+            Cursor c = mForecastAdapter.getCursor();
+
+            if(c != null){
+                c.moveToFirst();
+                String lat = c.getString(COL_COORD_LAT);
+                String lon = c.getString(COL_COORD_LONG);
+                Uri geoLocation = Uri.parse("geo:"+lat+","+lon+ Utility.getPreferredLocation(getActivity()));
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(geoLocation);
+                if(intent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "No relevant app found", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }
