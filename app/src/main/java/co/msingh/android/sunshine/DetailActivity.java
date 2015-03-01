@@ -28,6 +28,10 @@ public class DetailActivity extends ActionBarActivity {
         }
     }
 
+    public void updateTitle(String title){
+        setTitle(title);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

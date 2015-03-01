@@ -173,9 +173,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             String high = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MAX_TEMP), isMetric);
             String low = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MIN_TEMP), isMetric);
 
+            String dayText = Utility.getDayName(getActivity(), date);
+            String dateText = Utility.getFormattedMonthDay(getActivity(), date);
 
-            mDayTextView.setText(Utility.getDayName(getActivity(), date));
-            mDateTextView.setText(Utility.getFormattedMonthDay(getActivity(), date));
+            mDayTextView.setText(dayText);
+            mDateTextView.setText(dateText);
             mHighTextView.setText(high);
             mLowTextView.setText(low);
             mWeatherDescriptionTextView.setText(data.getString(COL_WEATHER_DESC));
@@ -189,6 +191,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             if(mShareActionProvider != null){
                 mShareActionProvider.setShareIntent(createShareForecastIntent());
             }
+
+            ((DetailActivity)getActivity()).updateTitle(dateText);
         }
     }
 
